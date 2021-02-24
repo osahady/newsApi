@@ -25,7 +25,7 @@ class ItemModel {
   final int parent;
   final List<dynamic> kids;
   final String url;
-  final String score;
+  final int score;
   final String title;
   final int descendants;
 
@@ -49,14 +49,14 @@ class ItemModel {
     if (json == null) return null;
     return ItemModel(
       by: json[byField],
-      dead: json[deadField],
-      deleted: json[deletedField],
-      descendants: json[descendantsField],
+      dead: json[deadField] ?? false,
+      deleted: json[deletedField] ?? false,
+      descendants: json[descendantsField] ?? 0,
       id: json[idField],
-      kids: json[kidsField],
+      kids: json[kidsField] ?? [],
       parent: json[parentField],
       score: json[scoreField],
-      text: json[textField],
+      text: json[textField] ?? '',
       time: json[timeField],
       title: json[titleField],
       type: json[typeField],
@@ -86,12 +86,12 @@ class ItemModel {
   Map<String, dynamic> toMap() {
     return {
       idField: id,
-      deletedField: deleted ? 1 : 0,
+      deletedField: deleted,
       typeField: type,
       byField: by,
       timeField: time,
       textField: text,
-      deadField: dead ? 1 : 0,
+      deadField: dead,
       parentField: parent,
       kidsField: jsonEncode(kids),
       urlField: url,

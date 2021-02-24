@@ -21,7 +21,7 @@ class Repository {
   //m2:
   Future<ItemModel> fetchItem(int id) async {
     ItemModel item;
-    Source source;
+    var source;
 
     for (source in sources) {
       item = await source.fetchItem(id);
@@ -29,11 +29,18 @@ class Repository {
     } //end for
 
     for (var cache in caches) {
-      cache.addItem(item);
+      if (cache != source) if (item != null) cache.addItem(item);
     } //end for
 
     return item;
   } //end of fetchItem method
+
+  //m3:
+  clearCache() async {
+    for (var cache in caches) {
+      await cache.clear();
+    }
+  }
 } //end of Repository class
 
 abstract class Source {
@@ -43,4 +50,5 @@ abstract class Source {
 
 abstract class Cache {
   Future<int> addItem(ItemModel item);
+  Future<int> clear();
 } //end of Cache class

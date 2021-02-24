@@ -10,7 +10,11 @@ class NewsDbProvider implements Source, Cache {
   Database db;
 
   NewsDbProvider() {
-    init();
+    try {
+      init();
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   void init() async {
@@ -20,7 +24,7 @@ class NewsDbProvider implements Source, Cache {
       path,
       version: 1,
       onCreate: (newDb, version) {
-        newDb.execute('''
+        newDb.execute("""
           CREATE TABLE Items
             (
               ${ItemModel.idField} INTEGER PRIMARY KEY,
@@ -33,12 +37,11 @@ class NewsDbProvider implements Source, Cache {
               ${ItemModel.parentField} INTEGER,
               ${ItemModel.kidsField} BLOB,
               ${ItemModel.urlField} TEXT,
-              ${ItemModel.scoreField} TEXT,
+              ${ItemModel.scoreField} INTEGER,              
               ${ItemModel.titleField} TEXT,
               ${ItemModel.descendantsField} INTEGER
-
             )
-        ''');
+        """);
       },
     );
   } //end of init method
@@ -60,7 +63,11 @@ class NewsDbProvider implements Source, Cache {
 
   //m3:
   Future<int> addItem(ItemModel item) {
-    return db.insert('Items', item.toMap());
+    return db.insert(
+      'Items',
+      item.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
   }
 
   //m4:
@@ -68,6 +75,11 @@ class NewsDbProvider implements Source, Cache {
   Future<List<int>> fetchTopIds() {
     return null;
   }
+
+  //m5:
+  Future<int> clear() {
+    return db.delete('Items');
+  } //end of clear method
 } //end of NewsDbProivder
 
 final newsDbProvider = NewsDbProvider();
