@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news/src/app.dart';
 import 'package:news/src/blocs/story_bloc.dart';
+import 'package:news/src/blocs/story_provider.dart';
 import 'package:news/src/widgets/news_list_tile.dart';
 import 'package:news/src/widgets/refresh.dart';
 import 'package:news/src/widgets/waiting.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news/src/blocs/story_bloc.dart';
+import 'package:news/src/blocs/comment_provider.dart';
+import 'package:news/src/blocs/story_provider.dart';
 import 'package:news/src/screens/ui_item_details.dart';
 import 'package:news/src/screens/ui_news_list.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(create: (context) => storyBloc),
+        Provider<StoryBloc>(create: (context) => storyBloc),
       ],
       child: MaterialApp(
         title: 'News!',

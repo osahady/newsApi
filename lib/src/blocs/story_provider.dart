@@ -3,15 +3,15 @@ import 'package:news/src/blocs/story_bloc.dart';
 export 'story_bloc.dart';
 
 class StoryProvider extends InheritedWidget {
-  final StoryBloc bloc;
+  final StoryBloc storyBloc;
 
   StoryProvider({Key key, Widget child})
-      : bloc = StoryBloc(),
+      : storyBloc = StoryBloc(),
         super(key: key, child: child);
 
   bool updateShouldNotify(_) => true;
 
   static StoryBloc of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType();
+    return context.dependOnInheritedWidgetOfExactType<StoryProvider>().storyBloc;
   }
 }

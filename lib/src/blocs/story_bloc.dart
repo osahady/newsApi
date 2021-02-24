@@ -39,7 +39,7 @@ class StoryBloc {
   } //end of dispose method
 
   _itemsTransformer() {
-    return ScanStreamTransformer(
+    return ScanStreamTransformer<int, Map<int, Future<ItemModel>>>(
       (Map<int, Future<ItemModel>> cache, int id, index) {
         print('This is called $index times');
         cache[id] = _repository.fetchItem(id);

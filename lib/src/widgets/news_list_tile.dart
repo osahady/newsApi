@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news/src/blocs/story_bloc.dart';
+import 'package:news/src/blocs/story_provider.dart';
 import 'package:news/src/models/item_model.dart';
 import 'package:news/src/widgets/empty.dart';
 import 'package:news/src/widgets/loading_container.dart';
-import 'package:news/src/widgets/waiting.dart';
 import 'package:provider/provider.dart';
 
 class NewsListTile extends StatelessWidget {
